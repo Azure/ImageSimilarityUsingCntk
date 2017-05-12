@@ -7,7 +7,7 @@ locals().update(importlib.import_module("PARAMETERS").__dict__)
 ####################################
 # Parameters
 ####################################
-queryImgPath = r"C:/Users/pabuehle/Desktop/ImageSimilarityUsingCntk/data/fashionTexture/striped/95.jpg"
+queryImgPath = "./data/fashionTexture/striped/95.jpg"  #pointer to an image anywhere on disk
 distMethod = 'weightedL2'  # Options: 'L2', 'weightedL2', 'weightedL2Prob', ...
 
 

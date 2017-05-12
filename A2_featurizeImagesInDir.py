@@ -4,17 +4,17 @@ from helpers_cntk import *
 
 # This script shows how to use the refined model to computes
 # features for all images in a directory. Note that this
-# script does not import the parameters and file paths
+# script does not import any parameters and file paths
 # specified in PARAMETERS.py.
 
 
 ####################################
 # Parameters
 ####################################
-imgDir    = "C:/Users/pabuehle/Desktop/newImgs/"          # Directory with images to featurize
-modelPath = "C:/Users/pabuehle/Desktop/cntk.model"        # Path to trained CNTK model
-outFeaturesPath = os.path.join(imgDir, "features.pickle") # Output location where computed features will be save to
-boImgDirRecursive = True                                  # Set to "true" if images are in sub-folders within imgDir
+imgDir    = "./data/fashionTexture/leopard/"      # Directory with images to featurize
+modelPath = "./proc/fashionTexture/cntk.model"    # Path to trained CNTK model anywhere on disk
+outFeaturesPath = "features.pickle"               # Output location where computed features will be save to
+boImgDirRecursive = False                         # Set to "true" if images are in sub-folders within imgDir
 
 
 ####################################
