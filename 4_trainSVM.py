@@ -58,7 +58,8 @@ for hardNegIter in range(svm_hardNegMining_nrIterations+1):
 
 # Calibrate probability. Set weights to balance dataset as if 10 times more negatives than positives
 del learner
-sampleWeights = getSampleWeights(labels_test, negPosRatio = 10)
+print("Probability calibration positive to negative ration = {}".format(svm_probabilityCalibrationNegPosRatio))
+sampleWeights = getSampleWeights(labels_test, negPosRatio = svm_probabilityCalibrationNegPosRatio)
 bestLearner = calibration.CalibratedClassifierCV(bestLearner, method='sigmoid', cv = "prefit") #sigmoid, isotonic
 bestLearner.fit(feats_test, labels_test, sample_weight = sampleWeights)
 saveToPickle(svmPath, bestLearner)

@@ -38,7 +38,7 @@ svm_featureDifferenceMetric = 'l2'       # Use weighted L2 distance
 svm_hardNegMining_nrIterations = 0       # Number of hard negative mining iterations. Set to 0 to deactivate
 svm_hardNegMining_nrAddPerIter = 5000    # Maximum number of hard negatives to add at each mining iteration
 svm_hardNegMinging_maxNrRoundsPerIter = 100000 # Maximum number of image pairs tested during one hard negative iteration
-
+svm_probabilityCalibrationNegPosRatio = 10 # Negative-to-positive ratio for Platt smoothing
 
 ###################
 # Fixed parameters
