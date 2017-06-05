@@ -25,7 +25,7 @@ While previous experience with machine learning and CNTK is not required, it is 
 PREREQUISITES
 --------------
 
-This tutorial requires CNTK 2.0.rc1 (release candidate 1) or higher and assumes that CNTK was installed with the (default) Anaconda Python interpreter. Note that the code in this tutorial will not run on previous CNTK versions due to breaking changes introduced in 2.0.rc1.
+This code was tested using CNTK 2.0.0, and assumes that CNTK was installed with the (default) Anaconda Python interpreter using the script-driven installation. Note that the code will not run on previous CNTK versions due to breaking changes.
 
 A dedicated GPU, while technically not being required, is however recommended for refining of the DNN. If you lack a strong GPU, don't want to install CNTK yourself, or want to train on multiple GPUs, then consider using Azure's Data Science Virtual Machine. See the [Deep Learning Toolkit](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/microsoft-ads.dsvm-deep-learning) for a 1-click deployment solution.
 
@@ -41,9 +41,7 @@ pip.exe install -r requirements.txt
 In the code snippet above, we assumed that the CNTK root directory is  *C:/local/CNTK-2-0-rc1/*. The opencv python wheel was originally downloaded from this [page](http://www.lfd.uci.edu/~gohlke/pythonlibs/).
 
 Troubleshooting:
-- The error "Batch normalization training on CPU is not yet implemented" can be caused when installing the CPU-only version of CNTK. In such cases, try the GPU version, even if your system does not have a GPU installed.
-
-
+- The error "Batch normalization training on CPU is not yet implemented" is thrown when trying to train the DNN using a CPU-only system. This is due to CNTK currently only providing CPU support for running, though not training, batch normalized networks. To skip training and hence avoid this error set `rf_maxEpochs` to zero in `PARAMETERS.py`.  
 
 
 FOLDER STRUCTURE
@@ -151,7 +149,7 @@ In addition, a plot like the one below is drawn which shows how the training and
 <img src="doc/output_script_2_plot.png" alt="alt text" height="300"/>
 </p>
 
-DNN training is very slow without GPU acceleration. The script should write the string "Using GPU for training" to the console - if this is not the case then either no GPU was found or the GPU is locked (e.g. by a previous CNTK run). Optionally, one can skip model refinement altogether by setting the `rf_maxEpochs` variable to 0.
+DNN training is very slow without GPU acceleration, and furthermore CNTK currently does not support CPU-only training of batch normalized networks. The script should write the string "Using GPU for training" to the console - if this is not the case then either no GPU was found or the GPU is locked (e.g. by a previous CNTK run). Optionally, one can skip model refinement altogether by setting the `rf_maxEpochs` variable to 0.
 
 
 ### STEP 3: Featurize each image using the refined DNN
