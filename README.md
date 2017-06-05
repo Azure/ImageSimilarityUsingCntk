@@ -38,7 +38,7 @@ cd resources/python35_64bit_requirements/
 pip.exe install -r requirements.txt
 ````
 
-In the code snippet above, we assumed that the CNTK root directory is  *C:/local/CNTK-2-0-rc1/*. The opencv python wheel was originally downloaded from this [page](http://www.lfd.uci.edu/~gohlke/pythonlibs/).
+In the code snippet above, we assumed that the CNTK root directory is  *C:/local/CNTK-2-0/*. The opencv python wheel was originally downloaded from this [page](http://www.lfd.uci.edu/~gohlke/pythonlibs/).
 
 Troubleshooting:
 - The error "Batch normalization training on CPU is not yet implemented" is thrown when trying to train the DNN using a CPU-only system. This is due to CNTK currently only providing CPU support for running, though not training, batch normalized networks. To skip training and hence avoid this error set `rf_maxEpochs` to zero in `PARAMETERS.py`.  
