@@ -33,7 +33,7 @@ CNTK can be easily installed by following the instructions on the [setup page](h
 
 Anaconda comes with many packages already pre-installed. The only missing packages are opencv and scikit-learn. These can be installed easily using *pip* by opening a command prompt and running:
 ````bash
-C:/local/CNTK-2-0-rc1/cntk/Scripts/cntkpy35.bat #activate CNTK's python environment
+C:/local/CNTK-2-0/cntk/Scripts/cntkpy35.bat #activate CNTK's python environment
 cd resources/python35_64bit_requirements/
 pip.exe install -r requirements.txt
 ````
