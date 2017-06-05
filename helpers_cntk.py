@@ -2,11 +2,11 @@
 import os, random, pdb
 import matplotlib.pyplot as plt
 
-from cntk import *
+from cntk import constant, use_default_device, cross_entropy_with_softmax, classification_error
 from cntk import load_model, Trainer, UnitType
 from cntk.io import MinibatchSource, ImageDeserializer, StreamDefs, StreamDef
 import cntk.io.transforms as xforms
-from cntk.layers import placeholder, constant, GlobalAveragePooling, Dropout, Dense
+from cntk.layers import placeholder, GlobalAveragePooling, Dropout, Dense
 from cntk.learners import momentum_sgd, learning_rate_schedule, momentum_schedule
 from cntk.logging import log_number_of_parameters, ProgressPrinter, graph
 from cntk.logging.graph import find_by_name
@@ -174,7 +174,7 @@ def cntkComputeTestError(trainer, minibatch_source_test, mb_size, epoch_size, in
     return acc_numer / float(sample_counts)
 
 
-def runCntkModel(model, map_file, node_name = []):
+def runCntkModel(model, map_file, node_name = [], mb_size = 1):
     # Get minibatch source
     num_classes = model.shape[0]
     (image_width, image_height) = find_by_name(model, "input").shape[1:]
@@ -190,17 +190,23 @@ def runCntkModel(model, map_file, node_name = []):
 
     # Evaluate DNN for all images
     data = []
-    imgPaths = getColumn(readTable(map_file),0)
-    for imgIndex, imgPath in enumerate(imgPaths):
-        mb = minibatch_source.next_minibatch(1)
-        output = output_node.eval(mb[features_si])[0].flatten()
-        data.append((imgPath,output))
-        if imgIndex % 100 == 0:
-            print("Evaluating DNN (output dimension = {}) for image {} of {}: {}".format(len(output), imgIndex, len(imgPaths), imgPath))
+    sample_counts = 0
+    imgPaths = getColumn(readTable(map_file), 0)
+    while sample_counts < len(imgPaths):
+        sample_count = min(mb_size, len(imgPaths) - sample_counts)
+        mb = minibatch_source.next_minibatch(sample_count)
+        output = output_node.eval(mb[features_si])
+        data += [o.flatten() for o in output]
+        sample_counts += sample_count
+        if sample_counts % 100 < mb_size:
+            print("Evaluating DNN (output dimension = {}) for image {} of {}: {}".format(len(data[-1]), sample_counts,
+                                                                                         len(imgPaths),
+                                                                                         imgPaths[sample_counts - 1]))
+    data = [[imgPath, feat] for imgPath, feat in zip(imgPaths, data)]
     return data
 
 
-def featurizeImages(model, imgFilenamesPath, imgDir, map_file, node_name = []):
+def featurizeImages(model, imgFilenamesPath, imgDir, map_file, node_name = [], mb_size = 1):
     # Get image paths
     imgFilenames = loadFromPickle(imgFilenamesPath)
     imgLabelMap  = getImgLabelMap(imgFilenames, imgDir)

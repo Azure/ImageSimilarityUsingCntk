@@ -14,9 +14,9 @@ model = load_model(cntkRefinedModelPath)
 
 # Compute features for each image and write to disk
 print("Featurizing test set..")
-featuresTest  = featurizeImages(model, imgFilenamesTestPath,  imgDir, workingDir + "/featurizer_map.txt", "poolingLayer")
+featuresTest  = featurizeImages(model, imgFilenamesTestPath,  imgDir, workingDir + "/featurizer_map.txt", "poolingLayer", run_mbsize)
 print("Featurizing training set..")
-featuresTrain = featurizeImages(model, imgFilenamesTrainPath, imgDir, workingDir + "/featurizer_map.txt", "poolingLayer")
+featuresTrain = featurizeImages(model, imgFilenamesTrainPath, imgDir, workingDir + "/featurizer_map.txt", "poolingLayer", run_mbsize)
 features = mergeDictionaries(featuresTrain, featuresTest)
 for feat in list(features.values()):
     assert(len(feat) == rf_modelOutputDimension)

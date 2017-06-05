@@ -4,7 +4,7 @@ import sys, os
 
 #######################################
 #######################################
-datasetName = "fashionTexture"           # Name of the image directory, e.g. /data/myFashion_texture/
+datasetName = "fashionTexture"          # Name of the image directory, e.g. /data/myFashion_texture/
 
 
 ###################
@@ -30,6 +30,9 @@ rf_momentumPerMb  = 0.9                 # Momentum during gradient descent
 rf_l2RegWeight    = 0.0005              # L2 regularizer weight during gradient descent
 rf_boFreezeWeights      = False         # Set to 'True' to freeze all but the very last layer. Otherwise the full network is refined
 rf_boBalanceTrainingSet = False         # Set to 'True' to duplicate images such that all labels have the same number of images
+
+# Model running parameter (script: 3_featurizeImages.py)
+run_mbsize = rf_mbSize
 
 # SVM training params (script: 4_trainSVM.py)
 svm_CVal = 0.1                           # Slack penality parameter C for SVM training
