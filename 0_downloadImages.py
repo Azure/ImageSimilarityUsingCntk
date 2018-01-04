@@ -4,12 +4,6 @@ locals().update(importlib.import_module("PARAMETERS").__dict__)
 
 
 ####################################
-# Parameter
-####################################
-downloadTopNImages = sys.maxsize  #set to e.g. 50 to only download the first 50 of the 428 images
-
-
-####################################
 # Main
 ####################################
 makeDirectory(rootDir + "/data/")

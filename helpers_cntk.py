@@ -95,7 +95,7 @@ def train_model(base_model_file, train_map_file, test_map_file, input_resolution
     epoch_size_test  = len(readTable(test_map_file))
     epoch_size_train = len(readTable(train_map_file))
     epoch_size_train = min(epoch_size_train, max_train_images)
-    num_classes = max(ToIntegers(getColumn(readTable(train_map_file), 1))) + 1
+    num_classes = max(ToIntegers(getColumn(readTable(train_map_file), 1)) + ToIntegers(getColumn(readTable(test_map_file), 1))) + 1
 
     # Create the minibatch source
     minibatch_source_train = create_mb_source(train_map_file, image_width, image_height, num_channels, num_classes, True)
