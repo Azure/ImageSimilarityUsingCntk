@@ -97,7 +97,7 @@ if boVisualizeResults:
             ax.axis('off')
             ax.set_title(title)
         plt.draw()
-        plt.savefig(visualizationDir + "/" + queryImgInfo.fname.replace('/','-'), dpi=200, bbox_inches='tight', facecolor=plt.rcParams['figure.facecolor'])
+        #plt.savefig(visualizationDir + "/" + queryImgInfo.fname.replace('/','-'), dpi=200, bbox_inches='tight', facecolor=plt.rcParams['figure.facecolor'])
         plt.show()
 
 print("DONE.")

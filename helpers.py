@@ -339,7 +339,7 @@ def downloadFromUrl(url, boVerbose = True):
     data = []
     url = url.strip()
     try:
-        r = requests.get(url)
+        r = requests.get(url, timeout = 1)
         data = r.content
     except:
         if boVerbose:
