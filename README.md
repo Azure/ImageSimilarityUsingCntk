@@ -1,4 +1,10 @@
 
+```diff
++ This repository is not longer maintained. However, state-of-the-art image similarity is supported in
++ this Github repo: https://github.com/microsoft/computervision-recipes
+```
+https://github.com/microsoft/computervision-recipes
+
 Image Similarity Ranking using Microsoft Cognitive Toolkit (CNTK)
 ==============
 
